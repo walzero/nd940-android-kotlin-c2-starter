@@ -10,8 +10,7 @@
 /build
 /captures
 .externalNativeBuild
-.icloud
-
+*.icloud
 
 # gradle
 gradle/
