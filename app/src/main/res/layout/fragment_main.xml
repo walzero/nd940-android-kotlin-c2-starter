@@ -30,7 +30,8 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/placeholder_picture_of_day" />
+                app:srcCompat="@drawable/placeholder_picture_of_day"
+                tools:srcCompat="@drawable/asteroid_hazardous" />
 
             <TextView
                 android:id="@+id/textView"
@@ -59,7 +60,7 @@
             app:layout_constraintVertical_bias="0.0"
             app:listData="@{viewModel.asteroids}"
             tools:itemCount="16"
-            tools:listitem="@layout/item_asteroid" />
+            tools:listitem="@layout/asteroid_item" />
 
         <ProgressBar
             android:id="@+id/status_loading_wheel"
