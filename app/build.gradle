@@ -85,6 +85,12 @@ dependencies {
     // Material design components
     implementation "com.google.android.material:material:$version_material"
 
+    // Logging
+    implementation "com.jakewharton.timber:timber:$version_timber"
+
     // Client for retrieving location
     implementation "com.google.android.gms:play-services-location:$version_play_services"
+
+    // Joda time library for dealing with time
+    implementation "joda-time:joda-time:$version_joda"
 }

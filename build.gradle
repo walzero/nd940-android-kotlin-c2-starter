@@ -27,6 +27,8 @@ buildscript {
         version_work = "1.0.1"
         version_timber = "4.7.1"
         version_picasso = '2.5.2'
+        version_timber = '4.7.1'
+        version_joda = '2.10'
     }
 
 
