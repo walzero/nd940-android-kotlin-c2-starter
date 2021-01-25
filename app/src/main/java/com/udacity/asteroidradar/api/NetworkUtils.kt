@@ -1,14 +1,27 @@
 package com.udacity.asteroidradar.api
 
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.JsonReader
 import com.udacity.asteroidradar.data.Asteroid
 import com.udacity.asteroidradar.data.Constants
 import com.udacity.asteroidradar.data.Constants.API_QUERY_DATE_FORMAT
+import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+internal class AsteroidJsonAdapter {
+
+    @FromJson
+    fun fromJson(obj: JSONObject): List<Asteroid> {
+        return parseAsteroidsJsonResult(obj)
+    }
+
+}
+
+private fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
     val asteroidList = ArrayList<Asteroid>()

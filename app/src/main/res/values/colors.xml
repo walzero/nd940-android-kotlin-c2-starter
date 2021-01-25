@@ -6,5 +6,16 @@
     <color name="app_background">#010613</color>
     <color name="default_text_color">#FFFFFF</color>
     <color name="text_grey">#D2D2D2</color>
-    <color name="potentially_hazardous">#FF8282</color>
+    <color name="potentially_hazardous">#D12D2D</color>
+
+    <color name="primaryColor">#9575cd</color>
+    <color name="primaryLightColor">#c7a4ff</color>
+    <color name="primaryDarkColor">#65499c</color>
+    <color name="secondaryColor">#4f7fd1</color>
+    <color name="secondaryLightColor">#85aeff</color>
+    <color name="secondaryDarkColor">#00539f</color>
+    <color name="primaryTextColor">#faeaff</color>
+    <color name="secondaryTextColor">#c5cae9</color>
+    <color name="darkGray">#212121</color>
+
 </resources>

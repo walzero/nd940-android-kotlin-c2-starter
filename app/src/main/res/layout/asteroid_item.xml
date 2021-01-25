@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="kotlin.random.Random" />
+
         <variable
             name="asteroid"
             type="com.udacity.asteroidradar.data.Asteroid" />
@@ -13,16 +15,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/small_padding"
-        tools:background="@android:color/black">
+        android:background="@drawable/dark_fade_radial"
+        android:padding="@dimen/small_padding">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:elevation="16dp"
             android:text="@{asteroid.codename}"
-            android:textColor="@android:color/white"
+            android:textAppearance="?attr/textAppearanceHeadline5"
             app:layout_constraintBottom_toTopOf="@+id/date"
             app:layout_constraintEnd_toStartOf="@+id/icon"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{asteroid.closeApproachDate}"
-            android:textColor="@android:color/white"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent"

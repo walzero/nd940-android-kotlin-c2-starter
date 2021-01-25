@@ -18,11 +18,11 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun setTestValues() {
+    private fun setTestValues() {
         val list = listOf(
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -32,7 +32,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -42,7 +42,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -52,7 +52,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -62,7 +62,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -72,7 +72,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -82,7 +82,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -92,7 +92,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -102,7 +102,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -112,7 +112,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),
@@ -122,7 +122,7 @@ class MainViewModel : ViewModel() {
             ),
             Asteroid(
                 Random.nextLong(),
-                "test asteroid",
+                "68347 (2001 KB67)",
                 "1991-11-06",
                 Random.nextDouble(),
                 Random.nextDouble(),

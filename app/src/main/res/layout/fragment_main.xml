@@ -14,12 +14,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_background">
+        tools:background="@drawable/space_1">
 
         <FrameLayout
             android:id="@+id/activity_main_image_of_the_day_layout"
             android:layout_width="match_parent"
             android:layout_height="220dp"
+            android:background="@drawable/dark_fade_radial2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -30,7 +31,8 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/placeholder_picture_of_day"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/dark_fade_top_to_bottom"
                 tools:srcCompat="@drawable/asteroid_hazardous" />
 
             <TextView
@@ -38,9 +40,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="#55010613"
                 android:padding="16dp"
                 android:text="@string/image_of_the_day"
+                android:textAppearance="?attr/textAppearanceHeadline4"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
