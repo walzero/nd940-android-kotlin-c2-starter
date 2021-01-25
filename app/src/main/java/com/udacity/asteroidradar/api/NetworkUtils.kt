@@ -12,16 +12,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-internal class AsteroidJsonAdapter {
-
-    @FromJson
-    fun fromJson(obj: JSONObject): List<Asteroid> {
-        return parseAsteroidsJsonResult(obj)
-    }
-
-}
-
-private fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
     val asteroidList = ArrayList<Asteroid>()
@@ -56,7 +47,7 @@ private fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid
     return asteroidList
 }
 
-private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
+fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     val formattedDateList = ArrayList<String>()
 
     val calendar = Calendar.getInstance()

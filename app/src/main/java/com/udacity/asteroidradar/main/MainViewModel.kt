@@ -3,135 +3,27 @@ package com.udacity.asteroidradar.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.data.Asteroid
-import kotlin.random.Random
+import com.udacity.asteroidradar.repository.AsteroidRepository
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MainViewModel : ViewModel() {
 
-    private val _asteroids = MutableLiveData<List<Asteroid>>()
+    private val asteroidRepository = AsteroidRepository()
 
+    private val _asteroids = MutableLiveData<List<Asteroid>>()
     val asteroids: LiveData<List<Asteroid>>
         get() = _asteroids
 
     init {
-        setTestValues()
-    }
-
-
-    private fun setTestValues() {
-        val list = listOf(
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            ),
-            Asteroid(
-                Random.nextLong(),
-                "68347 (2001 KB67)",
-                "1991-11-06",
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextDouble(),
-                Random.nextBoolean()
-            )
-        )
-
-        _asteroids.value = list
+        viewModelScope.launch {
+            try {
+                _asteroids.value = asteroidRepository.refreshAsteroidsAsync()
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        }
     }
 }

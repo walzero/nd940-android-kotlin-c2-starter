@@ -1,38 +1,40 @@
 package com.udacity.asteroidradar.api
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.Deferred
-import org.json.JSONObject
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://api.nasa.gov/neo/rest/v1/"
+private const val BASE_URL = "https://api.nasa.gov"
 
 interface AsteroidApiService {
 
-    @GET(BASE_URL + "feed")
-    fun getAsteroidsAsync(
+    @GET("/neo/rest/v1/feed")
+    suspend fun getAsteroidsAsync(
         @Query("api_key") apiKey: String,
         @Query("start_date") startDate: String? = null,
         @Query("end_date") endDate: String? = null
-    ): Deferred<JSONObject>
+    ): String
 }
 
-private val moshi = Moshi.Builder()
-    .add(AsteroidJsonAdapter())
-    .add(KotlinJsonAdapterFactory())
-    .build()
+private val httpClient by lazy {
+    OkHttpClient.Builder()
+        .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(BODY))
+        .build()
+}
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
-    .build()
+private val retrofit by lazy {
+    Retrofit.Builder()
+        .addConverterFactory(ScalarsConverterFactory.create())
+        .client(httpClient)
+        .baseUrl(BASE_URL)
+        .build()
+}
 
 object AsteroidApi {
-    val retrofitService: AsteroidApiService by lazy { retrofit.create(AsteroidApiService::class.java) }
+
+    val asteroidService: AsteroidApiService = retrofit.create(AsteroidApiService::class.java)
 }

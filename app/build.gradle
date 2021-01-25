@@ -64,16 +64,15 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    // Retrofit with Moshi Converter
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
 
-    // Retrofit Coroutines Support
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
+    // OkHttp LoggingInterceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:$version_logging_interceptor"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
@@ -92,4 +91,6 @@ dependencies {
 
     // Joda time library for dealing with time
     implementation "joda-time:joda-time:$version_joda"
+
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 }
