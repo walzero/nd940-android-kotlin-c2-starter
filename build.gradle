@@ -25,7 +25,7 @@ buildscript {
         version_appcompat = "1.2.0"
         version_fragment = "1.2.5"
         version_joda = "2.10"
-        version_work = "1.0.1"
+        version_work = "2.4.0"
         version_timber = "4.7.1"
         version_picasso = '2.5.2'
         version_timber = '4.7.1'
