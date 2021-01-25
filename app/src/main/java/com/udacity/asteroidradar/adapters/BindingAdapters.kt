@@ -45,6 +45,6 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
-    val adapter = recyclerView.adapter as AsteroidAdapter
+    val adapter = recyclerView.adapter as AsteroidListAdapter
     adapter.submitList(data)
 }

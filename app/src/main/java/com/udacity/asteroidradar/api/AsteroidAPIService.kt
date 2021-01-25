@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.api
 
+import com.udacity.asteroidradar.data.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -7,8 +8,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-
-private const val BASE_URL = "https://api.nasa.gov"
 
 interface AsteroidApiService {
 
@@ -18,6 +17,7 @@ interface AsteroidApiService {
         @Query("start_date") startDate: String? = null,
         @Query("end_date") endDate: String? = null
     ): String
+
 }
 
 private val httpClient by lazy {
