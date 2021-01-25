@@ -1,7 +1,12 @@
 package com.udacity.asteroidradar.api
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import com.udacity.asteroidradar.api.ImageOfDayTransferObject.Companion.MEDIA_TYPE_IMAGE
 import com.udacity.asteroidradar.data.Asteroid
+import com.udacity.asteroidradar.data.ImageOfDay
 import com.udacity.asteroidradar.database.AsteroidDataModel
+import com.udacity.asteroidradar.database.ImageOfDayDataModel
 
 data class AsteroidTransferObject(
     val id: Long,
@@ -13,6 +18,38 @@ data class AsteroidTransferObject(
     val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean
 )
+
+@JsonClass(generateAdapter = true)
+data class ImageOfDayTransferObject(
+
+    @Json(name = "copyright")
+    val copyright: String = "",
+
+    @Json(name = "date")
+    val date: String = "",
+
+    @Json(name = "explanation")
+    val explanation: String = "",
+
+    @Json(name = "hdurl")
+    val hdurl: String = "",
+
+    @Json(name = "media_type")
+    val media_type: String = "",
+
+    @Json(name = "service_version")
+    val service_version: String = "",
+
+    @Json(name = "title")
+    val title: String = "",
+
+    @Json(name = "url")
+    val url: String = ""
+) {
+    companion object {
+        const val MEDIA_TYPE_IMAGE = "image"
+    }
+}
 
 fun ArrayList<AsteroidTransferObject>.asDomainModel(): List<Asteroid> {
     return map {
@@ -42,4 +79,26 @@ fun ArrayList<AsteroidTransferObject>.asDatabaseModel(): Array<AsteroidDataModel
             isPotentiallyHazardous = it.isPotentiallyHazardous
         )
     }.toTypedArray()
+}
+
+fun ImageOfDayTransferObject.asDomainModel(): ImageOfDay {
+    return ImageOfDay(
+        title = title,
+        explanation = explanation,
+        url = url,
+        hdurl = hdurl,
+        isImage = MEDIA_TYPE_IMAGE == media_type,
+        date = date
+    )
+}
+
+fun ImageOfDayTransferObject.asDatabaseModel(): ImageOfDayDataModel {
+    return ImageOfDayDataModel(
+        title = title,
+        explanation = explanation,
+        url = url,
+        hdurl = hdurl,
+        isImage = MEDIA_TYPE_IMAGE == media_type,
+        date = date
+    )
 }

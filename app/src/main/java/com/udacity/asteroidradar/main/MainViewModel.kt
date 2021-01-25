@@ -18,17 +18,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val nearbyAsteroids = asteroidRepository.nearbyAsteroids
 
+    val imageOfDay = asteroidRepository.imageOfTheDay
+
     private val _navigateToAsteroidDetail = MutableLiveData<Asteroid>()
     val navigateToAsteroidDetail: LiveData<Asteroid>
         get() = _navigateToAsteroidDetail
 
     init {
-        viewModelScope.launch {
-            try {
-                asteroidRepository.refreshAsteroidsAsync()
-            } catch (e: Exception) {
-                Timber.e(e)
-            }
+        launchRefreshNearbyAsteroids()
+        launchRefreshImageOfDay()
+    }
+
+    private fun launchRefreshNearbyAsteroids() = viewModelScope.launch {
+        try {
+            asteroidRepository.refreshNearbyAsteroidsAsync()
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+    }
+
+    private fun launchRefreshImageOfDay() = viewModelScope.launch {
+        try {
+            asteroidRepository.refreshImageOfTheDay()
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }
 

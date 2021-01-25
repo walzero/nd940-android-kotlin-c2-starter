@@ -11,12 +11,13 @@ class RefreshNearbyAsteroidWorker(
     appContext: Context,
     params: WorkerParameters
 ) : CoroutineWorker(appContext, params) {
+
     override suspend fun doWork(): Result {
         val database = getAsteroidDatabase(applicationContext)
         val repository = AsteroidRepository(database)
 
         return try {
-            repository.refreshAsteroidsAsync()
+            repository.refreshNearbyAsteroidsAsync()
             Result.success()
         } catch (e: HttpException) {
             Result.retry()
