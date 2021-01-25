@@ -31,7 +31,6 @@ buildscript {
         version_joda = '2.10'
     }
 
-
     repositories {
         google()
         jcenter()
