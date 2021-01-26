@@ -19,12 +19,12 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
 
     val nearbyAsteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getNearbyAsteroids()) {
-            it.asDomainModel()
+            it?.asDomainModel()
         }
 
     val imageOfTheDay: LiveData<ImageOfDay> =
         Transformations.map(database.asteroidDao.getImageOfDay()) {
-            it.asDomainModel()
+            it?.asDomainModel()
         }
 
     suspend fun refreshNearbyAsteroidsAsync() {

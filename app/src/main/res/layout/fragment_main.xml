@@ -16,38 +16,6 @@
         android:layout_height="match_parent"
         tools:background="@drawable/space_1">
 
-        <FrameLayout
-            android:id="@+id/activity_main_image_of_the_day_layout"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@drawable/dark_fade_radial2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/activity_main_image_of_the_day"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/dark_fade_top_to_bottom"
-                tools:srcCompat="@drawable/asteroid_hazardous" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="16dp"
-                android:text="@string/image_of_the_day"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </FrameLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/asteroid_recycler"
             android:layout_width="0dp"
@@ -58,9 +26,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:listData="@{viewModel.nearbyAsteroids}"
+            app:asteroidListData="@{viewModel.nearbyAsteroids}"
             tools:itemCount="16"
             tools:listitem="@layout/asteroid_item" />
 

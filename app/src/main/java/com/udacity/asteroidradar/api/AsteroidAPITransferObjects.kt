@@ -1,12 +1,13 @@
 package com.udacity.asteroidradar.api
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.squareup.moshi.*
 import com.udacity.asteroidradar.api.ImageOfDayTransferObject.Companion.MEDIA_TYPE_IMAGE
 import com.udacity.asteroidradar.data.Asteroid
 import com.udacity.asteroidradar.data.ImageOfDay
 import com.udacity.asteroidradar.database.AsteroidDataModel
 import com.udacity.asteroidradar.database.ImageOfDayDataModel
+import java.io.IOException
+
 
 data class AsteroidTransferObject(
     val id: Long,
@@ -101,4 +102,18 @@ fun ImageOfDayTransferObject.asDatabaseModel(): ImageOfDayDataModel {
         isImage = MEDIA_TYPE_IMAGE == media_type,
         date = date
     )
+}
+
+val VOID_JSON_ADAPTER: Any = object : Any() {
+    @FromJson
+    @Throws(IOException::class)
+    fun fromJson(reader: JsonReader): Void? {
+        return reader.nextNull()
+    }
+
+    @ToJson
+    @Throws(IOException::class)
+    fun toJson(writer: JsonWriter, v: Void?) {
+        writer.nullValue()
+    }
 }

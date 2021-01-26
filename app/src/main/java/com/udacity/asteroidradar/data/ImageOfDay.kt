@@ -9,6 +9,8 @@ class ImageOfDay(
     val explanation: String = "",
     val url: String = "",
     val hdurl: String = "",
-    val date: String,
+    val date: String = "",
     val isImage: Boolean = false
-) : Parcelable
+) : Parcelable {
+    fun getId(): Long = url.hashCode().toLong()
+}

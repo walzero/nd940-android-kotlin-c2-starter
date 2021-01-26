@@ -8,8 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.adapters.AsteroidListAdapter
-import com.udacity.asteroidradar.adapters.AsteroidListAdapter.AsteroidListener
+import com.udacity.asteroidradar.adapters.AsteroidListener
 import com.udacity.asteroidradar.data.Asteroid
+import com.udacity.asteroidradar.data.ImageOfDay
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -18,9 +19,19 @@ class MainFragment : Fragment() {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
+    private lateinit var asteroidAdapter: AsteroidListAdapter
+
     private val displayAsteroidDetailObserver by lazy {
         Observer<Asteroid?> { asteroid ->
             asteroid?.let { navigateToAsteroidDetails(it) }
+        }
+    }
+
+    private val imageOfTheDayObserver by lazy {
+        Observer<ImageOfDay?> { image ->
+            if (::asteroidAdapter.isInitialized) {
+                asteroidAdapter.updateImageOfTheDay(image)
+            }
         }
     }
 
@@ -33,9 +44,10 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.asteroidRecycler.adapter = AsteroidListAdapter(AsteroidListener {
-            viewModel.displayAsteroidDetails(it)
-        })
+        asteroidAdapter =
+            AsteroidListAdapter(AsteroidListener { viewModel.displayAsteroidDetails(it) })
+
+        binding.asteroidRecycler.adapter = asteroidAdapter
 
         setHasOptionsMenu(true)
 
@@ -54,11 +66,13 @@ class MainFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.navigateToAsteroidDetail.observe(this, displayAsteroidDetailObserver)
+        viewModel.imageOfDay.observe(this, imageOfTheDayObserver)
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.navigateToAsteroidDetail.removeObserver(displayAsteroidDetailObserver)
+        viewModel.imageOfDay.removeObserver(imageOfTheDayObserver)
     }
 
     private fun navigateToAsteroidDetails(asteroid: Asteroid) {

@@ -1,5 +1,7 @@
 package com.udacity.asteroidradar.api
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.data.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,6 +27,10 @@ interface AsteroidApiService {
     ): ImageOfDayTransferObject
 }
 
+private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
+
 private val httpClient by lazy {
     OkHttpClient.Builder()
         .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(BODY))
@@ -34,7 +40,7 @@ private val httpClient by lazy {
 private val retrofit by lazy {
     Retrofit.Builder()
         .addConverterFactory(ScalarsConverterFactory.create())
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .client(httpClient)
         .baseUrl(BASE_URL)
         .build()

@@ -2,6 +2,7 @@ package com.udacity.asteroidradar.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.udacity.asteroidradar.data.Asteroid
 import com.udacity.asteroidradar.data.ImageOfDay
@@ -35,7 +36,10 @@ data class AsteroidDataModel constructor(
     val isPotentiallyHazardous: Boolean = false
 )
 
-@Entity(tableName = "image_of_day")
+@Entity(
+    tableName = "image_of_day",
+    indices = [Index(value = ["url", "hdurl", "date"], unique = true)]
+)
 data class ImageOfDayDataModel constructor(
 
     @PrimaryKey(autoGenerate = true)
