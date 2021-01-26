@@ -38,11 +38,14 @@ class AsteroidListAdapter(
         }
     }
 
-    fun updateImageOfTheDay(imageOfDay: ImageOfDay?) {
-        if (this.imageOfDay?.url != imageOfDay?.url) {
-            this.imageOfDay = imageOfDay
-            if (itemCount > 0) {
+    fun updateImageOfTheDay(img: ImageOfDay?) {
+        when {
+            this.imageOfDay == null && itemCount > 0 -> {
+                this.imageOfDay = img
                 updateHeaderImageReference()
+            }
+            else -> {
+                this.imageOfDay = img
             }
         }
     }

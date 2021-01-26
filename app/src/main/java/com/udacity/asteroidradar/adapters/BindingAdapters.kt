@@ -9,7 +9,6 @@ import com.squareup.picasso.Picasso
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.data.Asteroid
 import com.udacity.asteroidradar.data.ImageOfDay
-import timber.log.Timber
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -31,7 +30,6 @@ fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
             imageView.contentDescription = getString(R.string.not_hazardous_asteroid_image)
         }
     }
-    Timber.e("CONTENT DESCRIPTION: ${imageView.contentDescription}")
 }
 
 @BindingAdapter("astronomicalUnitText")
@@ -81,6 +79,4 @@ fun bindImage(imgView: ImageView, imageOfDay: ImageOfDay?) {
             }
         }
     }
-
-    Timber.e("CONTENT DESCRIPTION: ${imgView.contentDescription}")
 }

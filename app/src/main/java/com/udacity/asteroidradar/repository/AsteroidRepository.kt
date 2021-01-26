@@ -13,9 +13,16 @@ import com.udacity.asteroidradar.extensions.fromBase64
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
+
     private val key64 = "eFlrOGk5dnVHOGFsM2VHZ01yRXVnUmk5Y01HRGRkMjM5aGZsc0tNbw=="
+
+    private val dateFormat by lazy {
+        SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+    }
 
     val nearbyAsteroids: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidDao.getNearbyAsteroids()) {
@@ -28,7 +35,16 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
         }
 
     suspend fun refreshNearbyAsteroidsAsync() {
-        val jsonResponse = asteroidService.getAsteroidsAsync(apiKey = key64.fromBase64())
+        val calendar = Calendar.getInstance()
+        val startDate = dateFormat.format(calendar.time)
+        calendar.add(Calendar.WEEK_OF_YEAR, 1)
+        val endDate = dateFormat.format(calendar.time)
+
+        val jsonResponse = asteroidService.getAsteroidsAsync(
+            apiKey = key64.fromBase64(),
+            startDate = startDate,
+            endDate = endDate
+        )
         val nearbyAsteroids = parseAsteroidsJsonResult(JSONObject(jsonResponse))
 
         withContext(Dispatchers.IO) {
