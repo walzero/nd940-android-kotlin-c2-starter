@@ -20,7 +20,7 @@ import java.util.*
 
 class AsteroidRepository(private val database: AsteroidDatabase) {
 
-    private val key64 = "eFlrOGk5dnVHOGFsM2VHZ01yRXVnUmk5Y01HRGRkMjM5aGZsc0tNbw=="
+    private val key = ""//TODO ADD YOUR API KEY HERE!
 
     private val dateFormat by lazy {
         SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
@@ -56,7 +56,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
         val endDate = dateFormat.format(calendar.time)
 
         val jsonResponse = asteroidService.getAsteroidsAsync(
-            apiKey = key64.fromBase64(),
+            apiKey = key,
             startDate = startDate,
             endDate = endDate
         )
@@ -68,7 +68,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     }
 
     suspend fun refreshImageOfTheDay() {
-        val imageOfTheDayTransferObject = asteroidService.getImageOfTheDay(key64.fromBase64())
+        val imageOfTheDayTransferObject = asteroidService.getImageOfTheDay(key)
 
         withContext(Dispatchers.IO) {
             database.asteroidDao.insertAll(imageOfTheDayTransferObject.asDatabaseModel())
