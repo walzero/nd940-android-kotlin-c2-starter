@@ -2,6 +2,7 @@ package com.udacity.asteroidradar.main
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -60,7 +61,24 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return true
+        when (item.itemId) {
+            R.id.show_week_asteroids -> {
+                viewModel.changeFilter(AsteroidFilter.WEEK)
+                return true
+            }
+
+            R.id.show_todays_asteroids -> {
+                viewModel.changeFilter(AsteroidFilter.DAY)
+                return true
+            }
+
+            R.id.show_saved_asteroids -> {
+                showNotImplementedToast()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {
@@ -78,5 +96,13 @@ class MainFragment : Fragment() {
     private fun navigateToAsteroidDetails(asteroid: Asteroid) {
         findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroid))
         viewModel.doneNavigatingToAsteroidDetail()
+    }
+
+    private fun showNotImplementedToast() {
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.not_yet_implemented),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

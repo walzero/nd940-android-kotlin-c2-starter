@@ -1,11 +1,9 @@
 package com.udacity.asteroidradar.main
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.udacity.asteroidradar.data.Asteroid
+import com.udacity.asteroidradar.data.ImageOfDay
 import com.udacity.asteroidradar.database.getAsteroidDatabase
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import kotlinx.coroutines.launch
@@ -14,11 +12,12 @@ import timber.log.Timber
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = getAsteroidDatabase(application)
+
     private val asteroidRepository = AsteroidRepository(database)
 
-    val nearbyAsteroids = asteroidRepository.nearbyAsteroids
+    var nearbyAsteroids: LiveData<List<Asteroid>> = asteroidRepository.nearbyAsteroids
 
-    val imageOfDay = asteroidRepository.imageOfTheDay
+    val imageOfDay: LiveData<ImageOfDay> = asteroidRepository.imageOfTheDay
 
     private val _navigateToAsteroidDetail = MutableLiveData<Asteroid>()
     val navigateToAsteroidDetail: LiveData<Asteroid>
@@ -27,6 +26,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         launchRefreshNearbyAsteroids()
         launchRefreshImageOfDay()
+    }
+
+    fun changeFilter(asteroidFilter: AsteroidFilter) {
+        asteroidRepository.setFilterOption(asteroidFilter)
     }
 
     private fun launchRefreshNearbyAsteroids() = viewModelScope.launch {
@@ -52,4 +55,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun doneNavigatingToAsteroidDetail() {
         _navigateToAsteroidDetail.value = null
     }
+}
+
+enum class AsteroidFilter {
+    WEEK,
+    DAY
 }
